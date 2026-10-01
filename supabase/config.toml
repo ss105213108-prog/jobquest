@@ -1,0 +1,5 @@
+project_id = "neqwkiruqfevlchiajor"
+
+[functions.parse-resume-ai]
+verify_jwt = true
+entrypoint = "./functions/parse-resume-ai/index.ts"

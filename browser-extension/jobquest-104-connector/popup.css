@@ -1,0 +1,10 @@
+:root { color-scheme: light; font-family: system-ui, "Microsoft JhengHei", sans-serif; }
+body { width: 430px; margin: 0; color: #28190f; background: #ead3a0; }
+main { padding: 18px; border: 7px solid #4b2c19; }
+.eyebrow { color: #7e5a2b; font: 700 10px Georgia, serif; letter-spacing: .2em; }
+h1 { margin: 4px 0 8px; font: 700 23px Georgia, serif; }
+p { margin: 8px 0; font-size: 12px; line-height: 1.6; }
+button { width: 100%; padding: 10px; border: 1px solid #231208; color: #f4dca4; background: linear-gradient(#58351f,#321c11); font-weight: 700; cursor: pointer; }
+button:disabled { cursor: wait; opacity: .65; }
+#status { font-weight: 700; }
+pre { max-height: 360px; overflow: auto; padding: 12px; color: #eaf6ee; background: #17251d; font: 11px/1.5 Consolas, monospace; white-space: pre-wrap; word-break: break-word; }

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Quest 104 Audit</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>104 Browser Connector</h1>
+      <p>只讀取目前 104 搜尋頁已呈現的前 10 筆公開職缺。</p>
+      <button id="read-jobs" type="button">讀取目前職缺</button>
+      <p id="status" role="status">尚未讀取</p>
+      <pre id="output" aria-label="擷取結果">[]</pre>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

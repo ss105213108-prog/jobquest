@@ -1,0 +1,30 @@
+Front End
+林小安
+
+學歷
+範例科技大學
+資訊工程學系
+2016/9~2022/1・畢業・自傳・【關於我】
+我專注於前端與 AI 應用產品。
+
+工作經歷
+範例餐飲有限公司｜餐飲服務生｜台中市中區｜2025/3~2026/5｜1年3個月
+負責顧客服務與現場作業。
+範例商店｜門市人員｜台中市西區｜2023/1~2024/6｜1年6個月
+負責商品陳列與庫存盤點。
+範例數位工作室｜前端開發助理｜遠端｜2022/2~2022/12｜11個月
+使用 HTML、CSS 與 JavaScript 協助維護網站。
+
+專案介紹
+專案名稱：VTuber 購物網站
+使用技術：HTML5 / CSS3 / JavaScript / Bootstrap / PHP / MySQL
+專案描述：獨立製作的電商網站。
+專案名稱：公會任務看板
+技術棧：TypeScript / React / Supabase / Vite
+專案描述：履歷與職缺配對介面。
+作品名稱：AI 文字工具
+Technologies: JavaScript / Cloudflare / OpenAI API
+專案描述：結構化文字處理工具。
+
+技能
+HTML CSS SCSS JavaScript TypeScript jQuery Bootstrap PHP MySQL PostgreSQL Supabase Cloudflare Git GitHub Vite AI OpenAI API

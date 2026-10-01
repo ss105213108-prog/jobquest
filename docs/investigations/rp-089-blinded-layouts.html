@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anonymous layout adjudication</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #1c2929; background: #f5f7f6; }
+    body { margin: 0; }
+    main { max-width: 1200px; padding: 24px; margin: auto; }
+    h1 { font-size: 1.4rem; margin: 0 0 8px; }
+    p { margin: 0 0 20px; line-height: 1.5; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    article { border: 1px solid #c7d2d0; border-radius: 6px; background: white; padding: 16px; }
+    h2 { font-size: 1rem; margin: 0 0 12px; }
+    canvas { display: block; width: 100%; max-width: 300px; height: auto; border: 1px solid #c7d2d0; background: white; }
+    label { display: block; font-size: .84rem; font-weight: 600; margin-top: 12px; }
+    select, textarea { box-sizing: border-box; width: 100%; margin-top: 4px; border: 1px solid #9aa9a7; border-radius: 4px; padding: 7px; background: white; color: inherit; font: inherit; }
+    textarea { min-height: 68px; resize: vertical; }
+    details { margin-top: 10px; font-size: .8rem; }
+    summary { cursor: pointer; }
+    table { border-collapse: collapse; width: 100%; margin-top: 6px; font-variant-numeric: tabular-nums; }
+    th, td { padding: 3px 5px; text-align: right; border-bottom: 1px solid #e2e8e6; }
+    th:first-child, td:first-child { text-align: left; }
+    button { margin-top: 20px; padding: 9px 13px; border: 1px solid #215e59; border-radius: 4px; color: white; background: #215e59; cursor: pointer; font: inherit; }
+    button:hover { background: #174844; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Anonymous layout adjudication</h1>
+  <p>Judge visible spatial structure only. Do not infer topic, author intent, or reading sequence from the four-character tokens. A Region may own more than one visible group.</p>
+  <div class="grid" id="layouts"></div>
+  <button id="download" type="button">Download responses</button>
+</main>
+<script type="application/json" id="layout-data">
+[
+  {"code":"B01","runs":[[30,760,500],[30,710,130],[290,710,240],[30,670,130],[290,670,240]]},
+  {"code":"B02","runs":[[40,740,300],[40,700,300],[40,660,300],[40,620,300]]},
+  {"code":"B03","runs":[[40,740,460],[110,740,120],[40,700,460],[110,700,120]]},
+  {"code":"B04","runs":[[25,760,130],[260,760,280],[260,735,280],[260,710,280],[25,680,130],[260,685,280],[260,660,280]]},
+  {"code":"B05","runs":[[30,760,130],[290,760,240],[30,720,130],[290,720,240],[30,660,500]]},
+  {"code":"B06","runs":[[20,740,75],[170,740,350],[20,700,75],[170,700,350],[20,660,75],[170,660,350]]},
+  {"code":"B07","runs":[[40,760,470],[40,730,470],[40,620,470],[40,590,470]]},
+  {"code":"B08","runs":[[30,780,130],[290,780,240],[30,750,130],[290,750,240],[30,700,500],[30,650,130],[290,650,240],[30,620,130],[290,620,240]]},
+  {"code":"B09","runs":[[40,740,220],[40,740,220],[40,700,220],[40,700,220]]},
+  {"code":"B10","runs":[[30,740,120],[280,740,250],[30,710,120],[280,710,250],[30,680,120],[280,680,250],[30,650,120],[280,650,250]]},
+  {"code":"B11","runs":[[25,750,100],[230,750,300],[230,710,300],[230,670,300],[230,630,300]]},
+  {"code":"B12","runs":[[20,740,190],[260,740,280],[20,700,190],[260,700,280],[20,660,190],[260,660,280]]}
+]
+</script>
+<script>
+  // The codes and order are deliberately unrelated to fixture names or ownership labels.
+  const layouts = JSON.parse(document.getElementById('layout-data').textContent);
+  const states = [
+    'UNIQUE_OBSERVABLE_PARTITION', 'MULTIPLE_VALID_PARTITIONS',
+    'REGION_OWNERSHIP_UNOBSERVABLE', 'INSUFFICIENT_RENDERING_INFORMATION',
+  ];
+  const host = document.getElementById('layouts');
+  for (const layout of layouts) {
+    const article = document.createElement('article');
+    const title = document.createElement('h2');
+    title.textContent = layout.code;
+    const canvas = document.createElement('canvas');
+    canvas.width = 600;
+    canvas.height = 800;
+    canvas.setAttribute('aria-label', `Anonymous geometry ${layout.code}`);
+    const context = canvas.getContext('2d');
+    context.fillStyle = '#ffffff';
+    context.fillRect(0, 0, 600, 800);
+    context.font = '24px monospace';
+    for (let index = 0; index < layout.runs.length; index++) {
+      const [x, y, width] = layout.runs[index];
+      const top = 800 - y - 10;
+      context.fillStyle = '#d9e8e5';
+      context.fillRect(x, top, width, 10);
+      context.strokeStyle = '#39756d';
+      context.strokeRect(x + .5, top + .5, width - 1, 9);
+      context.fillStyle = '#173e3a';
+      context.fillText(`G${String(index + 1).padStart(3, '0')}`, x + 3, top + 22);
+    }
+    const details = document.createElement('details');
+    const summary = document.createElement('summary');
+    summary.textContent = 'Canonical geometry';
+    const table = document.createElement('table');
+    table.innerHTML = '<thead><tr><th>Group</th><th>x</th><th>y</th><th>w</th><th>h</th></tr></thead>';
+    const body = document.createElement('tbody');
+    layout.runs.forEach(([x, y, width], index) => {
+      const row = document.createElement('tr');
+      for (const value of [`G${String(index + 1).padStart(3, '0')}`, x, y, width, 10]) {
+        const cell = document.createElement('td');
+        cell.textContent = value;
+        row.append(cell);
+      }
+      body.append(row);
+    });
+    table.append(body);
+    details.append(summary, table);
+    const choiceLabel = document.createElement('label');
+    choiceLabel.textContent = 'Observable Region partition';
+    const select = document.createElement('select');
+    select.dataset.code = layout.code;
+    select.innerHTML = '<option value="">Unanswered</option>' + states.map((state) => `<option>${state}</option>`).join('');
+    choiceLabel.append(select);
+    const rationaleLabel = document.createElement('label');
+    rationaleLabel.textContent = 'Spatial rationale and competing partition';
+    const rationale = document.createElement('textarea');
+    rationale.dataset.code = layout.code;
+    rationaleLabel.append(rationale);
+    article.append(title, canvas, details, choiceLabel, rationaleLabel);
+    host.append(article);
+  }
+  document.getElementById('download').addEventListener('click', () => {
+    const responses = layouts.map(({ code }) => ({
+      code,
+      classification: document.querySelector(`select[data-code="${code}"]`).value,
+      rationale: document.querySelector(`textarea[data-code="${code}"]`).value,
+    }));
+    const blob = new Blob([JSON.stringify({ schema: 'rp-089-blind-v1', responses }, null, 2)], { type: 'application/json' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'rp-089-blind-responses.json';
+    link.click();
+    URL.revokeObjectURL(link.href);
+  });
+</script>
+</body>
+</html>

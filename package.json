@@ -1,0 +1,38 @@
+{
+  "name": "job-quest-guild",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.app.json && vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.app.json --pretty false",
+    "preview": "vite preview",
+    "verify:rls": "node scripts/verify-rls.mjs",
+    "test:parsers": "vitest run tests/resumeParser.test.ts",
+    "test:resume-hardening": "vitest run tests/resumeParserHardening.test.ts",
+    "test:resume-structured": "vitest run tests/resumeStructuredExtraction.test.ts",
+    "test:matching": "vitest run tests/matchingEngine.test.ts",
+    "test:104": "vitest run tests/job104Integration.test.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.116.0",
+    "@vitejs/plugin-react": "latest",
+    "mammoth": "1.12.3",
+    "pdfjs-dist": "6.3.289",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "ajv": "8.20.0",
+    "autoprefixer": "latest",
+    "pdf-lib": "1.17.1",
+    "postcss": "latest",
+    "tailwindcss": "3.4.17",
+    "vitest": "5.0.1"
+  }
+}

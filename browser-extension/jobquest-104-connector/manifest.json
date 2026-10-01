@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Job Quest 104 Connector",
+  "version": "1.0.0",
+  "description": "擷取目前搜尋頁已載入的公開職缺，暫存資料僅提供給允許的 Job Quest 網站。",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_title": "Job Quest 104 Connector",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:5173/*",
+        "https://jobquest-snowy.vercel.app/*"
+      ],
+      "js": [
+        "app-bridge.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

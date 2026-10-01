@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Job Quest 104 Browser Connector Audit",
+  "version": "0.1.0",
+  "description": "Read up to 10 public job cards from the active 104 search results page for Phase 6B feasibility testing.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_title": "Job Quest 104 Audit",
+    "default_popup": "popup.html"
+  }
+}

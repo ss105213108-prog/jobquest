@@ -1,0 +1,16 @@
+Front End
+
+技能
+HTML CSS SCSS JavaScript TypeScript jQuery Bootstrap PHP MySQL PostgreSQL Supabase Cloudflare Git GitHub Vite AI OpenAI API
+
+學歷
+測試科技大學 視覺傳達系
+
+自傳
+【關於我】
+喜歡將設計與程式整合成可用的數位產品。
+
+專案介紹
+VTUBER 購物網站 2025/7~2026/7
+專案功能：商品瀏覽、購物車與會員界面。
+技術棧：HTML、SCSS、JavaScript、PHP、MySQL、GitHub。
