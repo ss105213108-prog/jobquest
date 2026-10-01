@@ -26,15 +26,21 @@ export function Job104ConnectorControls({ state, capturedCount, capturedAt, disa
         <button type="button" className="primary-button connector-import" disabled={disabled || !ready} onClick={onImport}>{importLabel}</button>
       </div>
       {state === 'missing-extension' && (
-        <details className="connector-help">
-          <summary>Development 安裝方式</summary>
-          <ol>
-            <li>在 Chromium Extensions 開啟 Developer Mode。</li>
-            <li>選擇 Load unpacked。</li>
-            <li>載入 <code>browser-extension/jobquest-104-connector/</code>。</li>
-            <li>重新整理 Job Quest 後再檢查 Connector。</li>
-          </ol>
-        </details>
+        <div className="connector-help">
+          <a href="/downloads/jobquest-104-connector.zip" download="jobquest-104-connector.zip">下載 104 Connector</a>
+          <details>
+            <summary>安裝說明（解壓後載入）</summary>
+            <ol>
+              <li>下載 ZIP。</li>
+              <li>解壓縮 ZIP；ZIP 無法直接安裝。</li>
+              <li>開啟 Chrome／Edge 擴充功能頁（<code>chrome://extensions</code>／<code>edge://extensions</code>）。</li>
+              <li>開啟 Developer Mode（開發人員模式）。</li>
+              <li>選擇 Load unpacked（載入未封裝項目）。</li>
+              <li>選擇解壓後包含 <code>manifest.json</code> 的資料夾。</li>
+              <li>重新整理 Job Quest，再按「檢查 Connector」。</li>
+            </ol>
+          </details>
+        </div>
       )}
     </section>
   )
