@@ -38,9 +38,17 @@ Manifest V3 的 background、popup、content-script 路徑在解壓後均存在�
 | Full suite | 2387 PASS／5 FAIL／0 skipped；5 個 RP-014 PDF baseline failure 名稱與 failureMessages 完全相同，無新 regression |
 | Typecheck / production build | PASS；既有 bundle size warning 保留 |
 | Browser UI QA | PASS，實際 component + 既有 CSS 的 isolated fixture，下載在 collapsed details 外可見、可展開 7 步說明；ready 原 import 控制項仍正常。不是 native Extension acceptance |
-| Production ZIP HTTP / hash | PENDING_DEPLOYMENT |
-| Git push / Vercel auto deploy | PENDING_DEPLOYMENT |
+| Production ZIP HTTP / hash | PASS；實際下載 HTTP 200、Content-Type `application/zip`、6,120 bytes、SHA-256 與 local 完全相同；正式下載檔再解壓，7 檔逐一與 source hash 相同 |
+| Git push / Vercel auto deploy | PASS；commit `70375ecea38d53f24f7b903fc2c5b7092ca3917b` → `dpl_GNZ8BqpRQAnFtmyynHgn9CYMd6hA`；`source = git`、`target = production`、`readyState = READY` |
+| Production domain / homepage | PASS；`jobquest-snowy.vercel.app` 仍屬原 project 並指派新 deployment，`aliasAssigned = true`、`aliasError = null`；首頁 HTTP 200，正式 JS bundle 包含下載入口 |
+| Protected product / configuration files | PASS；除授權 UI 檔案外，293 個 tracked files SHA-256 全部未變，包含 Extension runtime、Batch、Matching、Auth、Supabase 與 config |
 | Chrome / Edge Load unpacked from downloaded ZIP | NOT VERIFIED；目前 automation 只有 IAB，不能操作外部 Extensions 頁面 |
 | Freshly installed ZIP detected by production Job Quest | NOT VERIFIED；需外部 Chrome／Edge 人工證據，不用 fixture 取代 |
 
-目前狀態：PENDING_PRODUCTION_AND_NATIVE_ACCEPTANCE。完成 production HTTP／hash 與 Git deployment 檢查後更新本文件。既有 source 的人工 PASS 不會直接當成此次下載 ZIP 的新安裝驗收。
+**Final：BLOCKED_CONNECTOR_DOWNLOAD_PACKAGE**
+
+實作、ZIP、正式下載與自動部署已完成。尚缺此次正式下載 ZIP 在外部 Chrome／Edge 的 Load unpacked、正式站實際 missing 狀態入口，以及安裝後 Connector 偵測／匯入人工證據。使用者已收到正式下載網址與這三項驗收要求；目前 browser inventory 只有 Codex IAB 與 MCP Apps，沒有可操作的外部 Chrome／Edge。這是驗收工具限制，不是已觀察到的套件失敗；未以 static／fixture PASS 取代 native acceptance，也未重試 GitHub／Supabase 內建瀏覽器登入。
+
+既有 source 的人工 PASS 不會直接當成此次下載 ZIP 的新安裝驗收。收到這次人工結果後再更新狀態。AI／PDF production runtime 仍為 Pending，1111 仍為 Roadmap。
+
+本證據更新會以 docs-only follow-up commit 保存，push 後再確認自動部署與 clean Git status；實際 follow-up SHA 見 [main history](https://github.com/ss105213108-prog/jobquest/commits/main/)。
